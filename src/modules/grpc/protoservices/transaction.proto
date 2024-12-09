@@ -1,0 +1,204 @@
+syntax = "proto3";
+
+package TransactionService ;
+
+message SubmitDepositTransactionToSmsubRequest {
+    string type = 1 ;
+    string trxPayload = 2 ;
+    string typeId = 3 ;
+    string clientId = 4;
+    applicant applicant = 5 ;
+    counterparty counterParty = 6 ;
+    info info = 7 ;
+    string coin = 8;
+    string fromAddress = 9;
+    string toAddress = 10;
+    string network = 11;
+}
+
+message SubmitWithdrawTransactionToSmsubRequest{
+    string type = 1 ;
+    applicant applicant = 2 ;
+    counterparty counterParty = 3 ;
+    info info = 4 ;
+    string coin = 5;
+    string typeId = 6;
+    string sumsubData = 7 ;
+    string score = 8 ; 
+    string clientId = 9;
+    string fromAddress = 10;
+    string toAddress = 11;
+    string txnId = 12 ; 
+    string network = 13;
+}
+
+message SubmitWithdrawTransactionToSmsubResponse{
+    string status= 1 ;
+    string message=2 ;
+    bool error=3 ;
+    withdrawTransactionData data = 4 ;
+    repeated ErrorObject errorData = 5 ;
+}
+
+message trxData {
+    string blockHash = 1 ;
+    int32 blockNumber = 2 ; 
+    string hash = 3 ;
+    int32 transactionIndex = 4 ; 
+    int32 type = 5 ;
+    int32 nonce = 6 ; 
+    string chainId = 7 ;
+    int32 gas = 8 ;
+    string from = 9 ;
+    string to = 10 ;
+    string value = 11 ;
+    string gasPrice = 12 ;
+}
+
+message applicant {
+    string externalUserId = 1 ; 
+    string fullName = 2 ;
+}
+
+message counterparty {
+    string externalUserId = 1 ; 
+    string fullName = 2 ;
+}
+
+message info {
+   string amount = 1 ; 
+   string currencyCode = 2 ;
+   string cryptoChain = 3 ;
+}
+
+message SubmitDepositTransactionToSmsubResponse {
+string status= 1 ;
+string message=2 ;
+bool error=3 ;
+transactionData data = 4 ;
+repeated ErrorObject errorData = 5;
+}
+
+message transactionData {
+    transactionObject transaction = 1 ; 
+}
+
+message transactionObject {
+        string transactionScore = 1 ;
+        string transactionApprovalStatus = 2 ;
+        string transactionCreatedAt = 3 ;
+}
+
+message withdrawTransactionData {
+    withdrawTransactionObject transaction = 1 ; 
+}
+
+message withdrawTransactionObject {
+        string transactionScore = 1 ;
+        string transactionApprovalStatus = 2 ;
+        string transactionCreatedAt = 3 ;
+        string sumsubData = 4 ; 
+        string txnId = 5 ; 
+}
+
+message ErrorObject {
+  string field = 1;
+  string message = 2;
+}
+
+message UpdateKYTLogStatusRequest {
+    string typeId = 1 ; 
+    string status = 2 ; 
+}
+
+message UpdateKYTLogStatusResponse {
+string status= 1 ;
+string message=2 ;
+bool error=3 ;
+transactionData data = 4 ;
+repeated ErrorObject errorData = 5;
+}
+
+message CheckKytTrxStatusRequest {
+    string typeId = 1 ; 
+}
+
+message CheckKytTrxStatusResponse {
+string status= 1 ;
+string message=2 ;
+bool error=3 ;
+KytTrxStatus data = 4 ;
+repeated ErrorObject errorData = 5;
+}
+
+message KytTrxStatus {
+string status = 1;
+}
+
+
+message FiatTransactionRequest {
+    FiatInfo info = 1;
+    Applicant applicant = 2;
+    Counterparty counterParty = 3;
+    string type = 4;
+    string txnId = 5 ; 
+}
+
+message FiatTransactionResponse {
+    string status= 1 ;
+    string message=2 ;
+    bool error=3 ;
+    FiatTransactionData data = 4 ;
+    repeated ErrorObject errorData = 5 ;
+}
+
+message FiatTransactionData {
+    FiatTransactionObject transaction = 1 ; 
+}
+
+message FiatTransactionObject {
+        string transactionScore = 1 ;
+        string transactionApprovalStatus = 2 ;
+        string transactionCreatedAt = 3 ;
+        string txnId = 5 ; 
+}
+
+message FiatInfo {
+    string amount = 3;
+    string currencyCode = 4;
+    string paymentDetails = 5;
+}
+
+message Applicant {
+    string externalUserId = 2;
+    string fullName = 3;
+}
+
+message Counterparty {
+    string externalUserId = 2;
+    string fullName = 3;
+}
+
+message UpdateFiatTransactionRequest {
+    string txnId = 1 ; 
+    string status = 2 ; 
+}
+
+message UpdateFiatTransactionResponse {
+    string status= 1 ;
+    string message=2 ;
+    bool error=3 ;
+    EmptyObj data = 4 ;
+    repeated ErrorObject errorData = 5 ;
+}
+
+message EmptyObj {}
+
+service TransactionService {
+rpc submitDepositTransationForApproval(SubmitDepositTransactionToSmsubRequest) returns (SubmitDepositTransactionToSmsubResponse) ;
+rpc submitWithdrawTransationForApproval(SubmitWithdrawTransactionToSmsubRequest) returns (SubmitWithdrawTransactionToSmsubResponse) ;
+rpc updateKYTLogStatus(UpdateKYTLogStatusRequest) returns (UpdateKYTLogStatusResponse) ;
+rpc checkKytTrxStatus(CheckKytTrxStatusRequest) returns (CheckKytTrxStatusResponse) ;
+rpc SubmitFiatTransaction(FiatTransactionRequest) returns (FiatTransactionResponse);
+rpc UpdateFiatTransaction(UpdateFiatTransactionRequest) returns (UpdateFiatTransactionResponse);
+}

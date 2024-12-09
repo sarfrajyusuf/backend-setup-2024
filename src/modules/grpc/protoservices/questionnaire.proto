@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package QuestinnaireService;
+
+service QuestinnaireService {
+  rpc getQuestionnaire(GetQuestinnaireRequest) returns (GetQuestinnaireResponse);
+  rpc updateManualScore(UpdateManualScoreRequest) returns (UpdateManualScoreResponse);
+}
+
+message GetQuestinnaireRequest {
+  string userId = 1;
+}
+
+message GetQuestinnaireResponse {
+  repeated Questionnaire data = 1;
+}
+
+message UpdateManualScoreRequest {
+  string questionnaireId = 1;
+  string manualScore = 2;
+  string text = 3;
+}
+
+message UpdateManualScoreResponse {
+  Questionnaire data = 1;
+}
+
+message Questionnaire {
+  string id = 1;
+  string questionId = 2;
+  string answerId = 3;
+  string userId = 4;
+  string manualScore = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+  repeated QuestionnaireComments comments = 8;
+  Answer answer = 9;
+  Question question = 10;
+}
+
+message Answer {
+  string id = 1;
+  string key = 2;
+  string title = 3;
+  string score = 4;
+  string type = 5; // business, individual
+  string questionId = 6;
+}
+
+message Question {
+  string id = 1;
+  string title = 2;
+  string key = 3;
+  string type = 4; // business, individual
+}
+
+message QuestionnaireComments {
+  string id = 1;
+  string text = 2;
+  string questionnaireId = 3;
+}

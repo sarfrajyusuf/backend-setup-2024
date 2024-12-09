@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package BankingService ;
+
+message updateStatusReq {
+string txnId = 1 ;
+string txnType = 2 ;
+string status = 3 ;
+}
+
+message updateStatusRes {
+int32 status = 1 ;
+string message = 2 ;
+bool error = 3 ;
+EmptyObject data = 4 ;
+}
+
+message EmptyObject {}
+
+service BankingService {
+rpc updateTransactionKytStatus(updateStatusReq) returns (updateStatusRes) ;
+}

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package AdminService;
+
+message EmptyObj {}
+
+message getMarketingBannerReq {
+  string page = 1;
+  string limit = 2;
+  string type = 3;
+}
+
+message getMarketingBannerRes {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  MarketingBanner data = 4;
+}
+
+message MarketingBanner {
+  repeated Banner list = 1;
+  string totalCounts = 2;
+}
+
+message Banner {
+  string bannerId = 1;
+  string image = 2;
+  string type = 3; 
+  string marketingLink = 4;
+}
+
+message getContentsReq {}
+
+message getContentsRes {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  MarketingContents data = 4;
+}
+
+message MarketingContents {
+  repeated Contents list = 1;
+}
+
+message Contents {
+  string contentId = 1;
+  string title = 2;
+  string content = 3; 
+  bool isDisabled = 4;
+}
+
+service AdminService {
+  rpc getMarketingBanners(getMarketingBannerReq) returns (getMarketingBannerRes);
+  rpc getContents(getContentsReq) returns (getContentsRes);
+}

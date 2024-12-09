@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>
+    <%= process.env.PROJECT_NAME %>
+  </title>
+  <style>
+    a {
+      color: #fff !important;
+      font-size: 14px;
+      margin: 5px 0;
+      padding: 10px 25px;
+      background: #3b5999;
+      font-weight: 500;
+      border-radius: 50px;
+      font-family: Montserrat, sans-serif;
+      text-decoration: none;
+    }
+
+    p {
+      margin: 5px 0;
+    }
+
+    a:hover {
+      background: #263042;
+    }
+  </style>
+</head>
+
+<body style="background-color:#ebebeb;">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center">
+    <tr style="background-color:#293244;">
+      <td style="padding:8px 20px 5px 20px;">
+        <img content-type="image/png" src="<%= process.env.LOGO_URL %>" alt="logo" width="130" />
+      </td>
+      <td style="padding:5px 15px 5px 0; font-family:Arial, Helvetica, sans-serif; font-size:18px; color:rgb(238, 230, 228);  text-align:right;">
+        <strong><%= subject%></strong>
+      </td>
+    </tr>
+    <tr style="background-color:#fff;">
+      <td colspan="2" style="padding:20px 20px 20px 20px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#2a2a2a;  border-top: 1px solid #e2e2e2;">
+        Hi,
+      </td>
+    </tr>
+    <tr style="background-color:#fff; border: 1px solid #e2e2e2;">
+      <td colspan="2" style="padding:0px 20px 0 20px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#2a2a2a; line-height:25px;">
+        <%- message%>
+      </td>
+    </tr>
+    <tr style="background-color:#fff;">
+      <td colspan="2" style="padding:20px 20px 20px 20px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#2a2a2a; line-height:25px;">
+        <p>Thanks,</p>
+        <p>
+          <%= process.env.PROJECT_NAME_EMAIL %> Team
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding:10px 0 10px 0px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#a0a0a0; text-align:center;">
+        ©
+        <%= process.env.COPYRIGHT_YEAR %>
+          <%= process.env.PROJECT_NAME %>. All Rights Reserved.
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

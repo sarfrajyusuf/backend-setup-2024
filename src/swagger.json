@@ -1,0 +1,1610 @@
+{
+  "openapi": "3.0.2",
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "UNIPAY"
+  },
+  "tags": [
+    {
+      "name": "USERS",
+      "description": "It contains all user API's "
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://stage-api.uniwalletpay.com/users/api/v1",
+      "description": "Stage Server"
+    },
+    {
+      "url": "https://stage-api.uniwalletpay.com/users/api/v1",
+      "description": "Dev Server"
+    },
+    {
+      "url": "http://localhost:3000/users/api/v1",
+      "description": "Local Server"
+    }
+  ],
+  "paths": {
+    "/user/registration": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "user registration",
+        "requestBody": {
+          "description": "user registration.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/register"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "user login.",
+        "requestBody": {
+          "description": "user login.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/isSocialIdExist": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "Is social id exist",
+        "requestBody": {
+          "description": "Is social id exist.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/isSocialIdExist"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/updateDeviceToken": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "update device token",
+        "requestBody": {
+          "description": "update device token.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateDeviceToken"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/isUserAlreadyRegistered": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "is user already registered",
+        "requestBody": {
+          "description": "is user already registered.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/isUserAlreadyRegistered"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/sendOtp": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "send OTP (SERVICE : REGISTRATION / LOGIN )",
+        "requestBody": {
+          "description": "send OTP.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendOtp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/verifyLoginOtp": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "send OTP (SERVICE : REGISTRATION / LOGIN )",
+        "requestBody": {
+          "description": "send OTP.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/verifyLoginOtp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/sendOtpAuth": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "send OTP auth",
+        "requestBody": {
+          "description": "send OTP.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendOtpAuth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/sendPhoneOtp": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "send phone OTP (SERVICE : ONLY FOR KYC PHONE VERIFICATION )",
+        "requestBody": {
+          "description": "send OTP.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sendPhoneOtp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/verifyOtp": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "verify OTP",
+        "requestBody": {
+          "description": "verify OTP.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/verifyOtp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/verifyPhoneNumber": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "verify phone OTP",
+        "requestBody": {
+          "description": "verify phone OTP.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/verifyPhoneOtp"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resetPassword": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "reset password",
+        "requestBody": {
+          "description": "reset password.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/resetPassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/resetMpin": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "reset MPIN",
+        "requestBody": {
+          "description": "reset MPIN.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/resetMpin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/forgotPassword": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "forgot password",
+        "requestBody": {
+          "description": "forgot password.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/forgotPassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/changePassword": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "change password",
+        "requestBody": {
+          "description": "change password.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/changePassword"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/changeMobilepin": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "change mobile pin",
+        "requestBody": {
+          "description": "change mobile pin.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/changeMPin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/updateProfile": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "update user profile",
+        "requestBody": {
+          "description": "update user profile.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateProfile"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/update2faStatus": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "update 2fa status",
+        "requestBody": {
+          "description": "update 2fa status.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/individualDetail": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "",
+        "requestBody": {
+          "description": "update invidividual user detail.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/individualUserDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/businessDetail": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "update user business detail.",
+        "requestBody": {
+          "description": "update user business detail.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/businessDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/enableDisableGoogleAuth": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "enable disable google authentication.",
+        "requestBody": {
+          "description": "enable disable google authentication.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/enableDisableGoogleAuth"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/verifyGoogleAuthCode": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "verify google authentication code.",
+        "requestBody": {
+          "description": "verify google authentication code.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/verifyGoogleAuthCode"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "user logout",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/logout"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/deleteAccount": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "delete user account",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getProfile": {
+      "get": {
+        "tags": ["USERS"],
+        "summary": "get user profile",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getSupportTickets": {
+      "get": {
+        "tags": ["USERS"],
+        "summary": "get support tickets",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/googleAuthQrCode": {
+      "get": {
+        "tags": ["USERS"],
+        "summary": "get google authentication qrcode",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getMarketingContent": {
+      "get": {
+        "tags": ["USERS"],
+        "summary": "get marketing content",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/getMarketingBanners/{limit}/{offset}/{type}": {
+      "get": {
+        "tags": ["USERS"],
+        "summary": "get marketing banners",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "limit",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "path",
+            "name": "offset",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "type": "string",
+            "enum": ["MOBILE", "WEB"]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/refreshToken": {
+      "post": {
+        "tags": ["USERS"],
+        "summary": "get new user token",
+        "requestBody": {
+          "description": "get new user token",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/refreshToken"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/createSupportTicket": {
+      "post": {
+        "tags": ["USERS"],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "subject": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "attachment": {
+                    "type": "array",
+                    "required": true,
+                    "items": {
+                      "type": "file"
+                    }
+                  },
+                  "description": {
+                    "type": "string",
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Request Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "JWT": {
+        "type": "apiKey",
+        "name": "api-access-token",
+        "in": "header",
+        "description": "Jwt authentication to access service"
+      },
+      "REFRESH_JWT": {
+        "type": "apiKey",
+        "name": "api-refresh-token",
+        "in": "header",
+        "description": "Refresh token for obtaining new access tokens"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "object",
+            "properties": {
+              "Error": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "register": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "required": true
+          },
+          "socialRegistrationVia": {
+            "type": "string",
+            "required": false
+          },
+          "socialId": {
+            "type": "string",
+            "required": false
+          },
+          "deviceId": {
+            "type": "string",
+            "required": true
+          },
+          "deviceType": {
+            "type": "string",
+            "required": true,
+            "enum": ["ANDROID", "IOS", "WEB"]
+          },
+          "deviceToken": {
+            "type": "string",
+            "required": false
+          },
+          "referredBy": {
+            "type": "string",
+            "required": false
+          }
+        }
+      },
+      "updateProfile": {
+        "type": "object",
+        "properties": {
+          "nationality": {
+            "type": "string",
+            "required": true
+          },
+          "accountType": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "updateStatus": {
+        "type": "object",
+        "properties": {
+          "statusType": {
+            "type": "string",
+            "required": true
+          },
+          "type": {
+            "type": "string",
+            "required": true,
+            "enum": ["LOGIN", "TRANSACTION"]
+          },
+          "status": {
+            "type": "boolean",
+            "required": false
+          },
+          "otp": {
+            "type": "string",
+            "required": false
+          }
+        }
+      },
+      "resetPassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "newPassword": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "logout": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "resetMpin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": false
+          },
+          "phoneNumber": {
+            "type": "string",
+            "required": false
+          },
+          "method": {
+            "type": "string",
+            "required": true,
+            "enum": ["EMAIL", "SMS"]
+          },
+          "mobilePin": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "changePassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "oldPassword": {
+            "type": "string",
+            "required": true
+          },
+          "newPassword": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "changeMPin": {
+        "type": "object",
+        "properties": {
+          "oldMobilePin": {
+            "type": "string",
+            "required": true
+          },
+          "newMobilePin": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "type": "string",
+            "required": true
+          },
+          "socialLoginVia": {
+            "type": "string",
+            "required": true
+          },
+          "socialId": {
+            "type": "string",
+            "required": true
+          },
+          "deviceId": {
+            "type": "string",
+            "required": true
+          },
+          "deviceType": {
+            "type": "string",
+            "required": true,
+            "enum": ["ANDROID", "IOS", "WEB"]
+          },
+          "deviceToken": {
+            "type": "string",
+            "required": false
+          }
+        }
+      },
+      "isUserAlreadyRegistered": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "isSocialIdExist": {
+        "type": "object",
+        "properties": {
+          "socialId": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "updateDeviceToken": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "required": true
+          },
+          "deviceToken": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "sendOtp": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "required": true
+          },
+          "method": {
+            "type": "string",
+            "required": true,
+            "enum": ["EMAIL", "SMS"]
+          },
+          "service": {
+            "type": "string",
+            "required": true,
+            "enum": ["REGISTRATION", "FORGOT_MPIN", "FORGOT_PASSWORD"]
+          }
+        }
+      },
+      "verifyLoginOtp": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "required": true,
+            "enum": ["EMAIL", "SMS"]
+          },
+          "otp": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "sendOtpAuth": {
+        "type": "object",
+        "properties": {
+          "method": {
+            "type": "string",
+            "required": true,
+            "default": "EMAIL"
+          },
+          "service": {
+            "type": "string",
+            "required": true,
+            "enum": ["CRYPTO_WITHDRAW"]
+          }
+        }
+      },
+      "sendPhoneOtp": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "verifyOtp": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "required": true
+          },
+          "otp": {
+            "type": "string",
+            "required": true
+          },
+          "method": {
+            "type": "string",
+            "required": true,
+            "enum": ["EMAIL", "SMS"]
+          },
+          "service": {
+            "type": "string",
+            "required": true,
+            "enum": ["REGISTRATION", "FORGOT_MPIN", "FORGOT_PASSWORD"]
+          }
+        }
+      },
+      "verifyPhoneOtp": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "required": true
+          },
+          "countryCode": {
+            "type": "string",
+            "required": true
+          },
+          "otp": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "forgotPassword": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "individualUserDetail": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "required": true
+          },
+          "lastName": {
+            "type": "string",
+            "required": true
+          },
+          "gender": {
+            "type": "string",
+            "required": true,
+            "enim": ["MALE"]
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "required": true
+          },
+          "address": {
+            "type": "string",
+            "required": true
+          },
+          "city": {
+            "type": "string",
+            "required": true
+          },
+          "postalCode": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "businessDetail": {
+        "type": "object",
+        "properties": {
+          "businessName": {
+            "type": "string",
+            "required": true
+          },
+          "brandName": {
+            "type": "string",
+            "required": true
+          },
+          "incorporationDate": {
+            "type": "string",
+            "required": true
+          },
+          "companyType": {
+            "type": "string",
+            "required": true
+          },
+          "taxOrVatId": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "enableDisableGoogleAuth": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "required": true
+          },
+          "type": {
+            "type": "string",
+            "required": true,
+            "enum": ["LOGIN", "TRANSACTION"]
+          }
+        }
+      },
+      "verifyGoogleAuthCode": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "refreshToken": {
+        "type": "object",
+        "properties": {
+          "deviceToken": {
+            "type": "string",
+            "required": false
+          },
+          "deviceType": {
+            "type": "string",
+            "required": true
+          },
+          "deviceId": {
+            "type": "string",
+            "required": true
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "JWT": [],
+      "REFRESH_JWT": []
+    }
+  ]
+}

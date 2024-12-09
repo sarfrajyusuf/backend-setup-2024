@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package overWalletService ;
+
+message updateStatusReq {
+  string coin = 1;
+  string typeId = 2;
+  string type = 3;
+  string amount = 4;
+  string status = 5;
+  string clientId = 6;
+  string trxType = 7;
+  string adminId = 8;
+}
+
+message updateStatusRes {
+  int32 status = 1;
+  string message = 2;
+  bool error = 3;
+  emptyRes data = 4;
+}
+
+message emptyRes {}
+
+
+service overWalletService {
+  rpc updateTransactionKytStatus(updateStatusReq) returns (updateStatusRes);
+}

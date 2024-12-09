@@ -1,0 +1,1033 @@
+syntax = "proto3";
+
+package UserService;
+
+
+enum UserStatus {
+  ACTIVE = 1;
+  INACTIVE = 2;
+}
+
+enum UserType {
+  INDIVIDUAL = 1;
+  BUSINESS = 2;
+}
+
+enum KycStatus { 
+  APPROVED = 1 ;
+  REJECTED = 2 ;
+  PENDING = 3;
+  FINAL_REJECTED = 4;
+  TEMPORARY_REJECTED = 5;
+  INITIATED = 6;
+  ON_HOLD = 7;
+}
+
+
+message GetCountryListRequest {
+
+}
+
+
+message GetCountryListReponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  CountryList data = 4; 
+}
+
+message CountryList{
+  repeated string list = 1;
+}
+
+message GetUsersRequest {
+  string limit = 1;
+  string offset = 2;
+  UserFilters filter = 3;
+}
+
+message UserFilters {
+  string startDate = 1;
+  string endDate = 2;
+  string nationality = 3;
+  UserType userType = 4;
+  string status = 5;
+  string verification = 6;
+  string search = 7;
+}
+
+
+message GetUsersReponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserList data = 4; 
+}
+
+message UserList {
+  repeated User list = 1;
+  string totalCount = 2;
+}
+
+message GetUserDetailRequest {
+  string userId = 1;
+}
+
+message GetUserDetailResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  User data = 4;
+  repeated ErrorObject errorData = 5;
+}
+
+
+message GetUserDetailClientIdRequest {
+  string clientId = 1;
+}
+
+message GetUserDetailClientIdResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserDetail data = 4; 
+}
+
+message User {
+  string id = 1;
+  string userId = 2;
+  string email = 3;
+  string firstName = 4;
+  string lastName = 5;
+  string nationality = 6;
+  string accountType = 7;
+  string address = 8;
+  string city = 9;
+  string postalCode = 10;
+  string phoneNumber = 11;
+  string businessName = 13;
+  string brandName = 14;
+  string companyType = 15;
+  string incorporationDate = 16;
+  string taxVatId = 17;
+  string dateOfBirth = 18;
+  string clientId = 19;
+  string status = 20;
+  bool isEmailVerified = 21;
+  bool isBlocked = 22;
+  string reasonToBlockUser = 23;
+  bool fiatInternalTxnStatus = 24;
+  bool fiatWithdrawStatus = 25;
+  bool cryptoInternalTxnStatus = 26;
+  bool cryptoWithdrawStatus = 27;
+  bool swapStatus = 28;
+  bool auth2FaStatus = 29;
+  string uidString = 30;
+  string userKycStatus = 31;
+  string adminKycStatus = 32;
+  bool isDeleted = 33;
+  bool isReferee = 34;
+  string createdAt = 35;
+  string updatedAt = 36; 
+}
+
+message BlockUnBlockUserRequest {
+  string userId = 1;
+  UserStatus status = 2;
+  string reason = 3;
+}
+
+message BlockUnBlockUserResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  BlockUnBlockStatus data = 4; 
+}
+
+message BlockUnBlockStatus {
+  UserStatus currentStatus=1;
+}
+
+message EmptyResponse {
+
+}
+
+message UpdateUserKycStatusRequest {
+  string userId = 1;
+  KycStatus userKycStatus = 2;
+  BusinessDetails businessDetail = 3;
+}
+
+message BusinessDetails {
+  string businessName = 1;
+  string brandName = 2;
+  string incorporationDate = 3;
+  string companyType = 4;
+  string taxVatId = 5;
+}
+
+message UpdateAdminKycStatusResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  EmptyResponse data = 4; 
+}
+
+message UpdateAdminKycStatusRequest {
+  string userId = 1;
+  KycStatus adminKycStatus = 2;
+  string rejectionReason = 3;
+}
+
+message GetUserInfoResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserInfo data = 4; 
+}
+
+message UserInfo { 
+  string userId = 1 ; 
+  string accountType = 2 ;
+  string email = 3 ;   
+  string nationality = 4;
+  string firstName = 5;
+  string lastName = 6;
+  string phoneNumber = 7;
+  string businessName=  8 ;
+  string brandName = 9 ;
+  string incorporationDate = 10;
+  string companyType = 11 ;
+  string taxVatId = 12;
+}
+
+message GetUserInfoRequest {
+  string userId = 1;
+}
+
+message GetUserCountsRequest {
+// empty request
+}
+
+message GetUserCountsResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserCounts data = 4; 
+}
+
+message UserCounts {
+  string totalUserCount = 1;
+  string totalIndividualUserCount = 2;
+  string totalBusinessUserCount = 3;
+  string lastSevenDaysUserCount = 4;
+  string lastThirtyDaysUserCount = 5;
+  string totalVerifiedUserCount = 6;
+}
+
+message updateUserClientIdRequest {
+  string userId = 1;
+  string clientId = 2;
+}
+
+message updateUserClientIdResponse {
+  int64 status = 1;
+  string message = 2;
+  bool error = 3;
+  EmptyResponse data = 4; 
+}
+
+message VerifyTransactionOtpRequest {
+  repeated otpPayload verificationPayload = 1;
+  string requestType = 3;
+}
+
+message otpPayload {
+ string otpType = 1;
+ string otp = 2;
+}
+
+
+message VerifyTransactionOtpResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  EmptyResponse data = 4;
+  repeated ErrorObject errorData = 5; 
+}
+
+message GetClientIdRequest {
+ string email = 1;
+}
+
+message GetUserDetailByClientIdRequest {
+  string clientId = 1;
+ }
+
+
+message GetUserDetailByClientIdResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserDetail data = 4; 
+}
+
+
+message GetUserByClientIdRequest {
+  string clientId = 1;
+ }
+
+
+message GetUserByClientIdResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserDetail data = 4; 
+}
+
+message GetClientIdResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  ClientId data = 4; 
+}
+
+message ClientId {
+  string clientId = 1;
+  string userId =2;
+}
+
+
+message getUserFcmTokensRequest {
+  string email = 1;
+  string userId =2 ;
+}
+
+message getUserFcmTokensResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  FcmTokenData data = 4; 
+}
+
+message FcmTokenData {
+  string userId = 1;
+  repeated string fcmTokens = 2;
+  string defaultLanguage = 3;
+  string defaultFiatCurrency = 4;
+}
+
+message UserDetail {
+  string userId = 1;
+  string email = 2;
+}
+
+message UpdateUserTxnStatusRequest {
+  string userId = 1;
+  string statusType = 2;
+  string status = 3;
+}
+
+message UpdateUserTxnStatusResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  EmptyResponse data = 4; 
+}
+
+message GetTxnStatusByKeyRequest {
+  string keyName = 1;
+}
+
+message GetTxnStatusByKeyResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  Status data = 4; 
+  repeated ErrorObject errorData = 5; 
+}
+
+
+message Status {
+bool status = 1;
+}
+
+message getUserDataByEmailRequest {
+  string email = 1;
+}
+
+message getUserDataByEmailResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserName data = 4; 
+}
+
+message UserName {
+  string firstName = 1;
+  string lastName = 2;
+}
+
+
+message IsUserSessionExistRequest {
+  // empty request
+}
+
+message IsUserSessionExistResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserSessionStatus data = 4; 
+  repeated ErrorObject errorData = 5; 
+}
+
+message UserSessionStatus {
+  bool isUserSessionExist = 1;
+}
+
+
+message getSupportTicketsRequest {
+  string limit = 1;
+  string offset = 2;
+  string status = 3;
+}
+
+message getSupportTicketsResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  SupportTickets data = 4; 
+}
+
+message SupportTickets{
+  repeated SupportTicket list = 1;
+  int32 totalCount = 2;
+}
+
+message SupportTicket {
+ int32 id = 1;
+ string userId = 2;
+ string ticketId = 3;
+ string subject = 4;
+ string description = 5;
+ string status = 6;
+ repeated string attachment = 7;
+ string resolvedAt = 8;
+ string comments = 9;
+ string createdAt = 10;
+ string updatedAt = 11;
+}
+
+
+message updateSupportTicketStatusRequest {
+  string ticketId = 1;
+  string status = 2;
+  string comment = 3;
+}
+
+message updateSupportTicketStatusResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  EmptyResponse data = 4; 
+}
+
+
+message GetUserInfoByUniqueIdRequest {
+  string uniqueId = 1;
+ }
+
+ message GetUserInfoByUniqueIdResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  UserId data = 4; 
+}
+
+message UserId {
+  string userId = 1;
+}
+
+
+message GetAllOtpsRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+ }
+
+ message GetAllOtpsResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  repeated Otps data = 4;
+  repeated ErrorObject errorData = 5; 
+}
+
+message Otps {
+  int32 id = 1;
+  string userId = 2;
+  string otp = 3;
+  string email = 4;
+  string phoneNumer = 5;
+  string method = 6;
+  string service = 7;
+  bool status = 8;
+  string createdAt = 9;
+  string updatedAt = 10;
+}
+
+
+message DeleteUserAccountRequest {
+  string userId = 1;
+ }
+
+ message DeleteUserAccountResponse {
+  string status = 1;
+  string message = 2;
+  bool error = 3;
+  EmptyResponse data = 4;
+  repeated ErrorObject errorData = 5; 
+}
+
+message GetKycsRequest {
+string offset = 1 	 ;
+string limit = 2 	 ;
+filterOptions filterOption = 3 ;
+string type = 4 	 ;
+}
+
+message GetComplianceKycsRequest {
+string offset = 1;
+string limit = 2;
+string completedByUserId = 3;
+string type = 4;
+complianceFilter filter = 5 ;
+}
+
+message complianceFilter {
+  string accountType = 1   ;
+  string searchBy= 2 	 ;
+  string startDate = 3   ;
+  string endDate = 4 	 ; 
+  string kycStatus = 5;
+  string nationality = 6 ;
+}
+
+message filterOptions {
+string nationality = 1  ;
+string accountType = 2  ;
+string startDate = 3	 ;
+string endDate = 4 	 ;
+string search = 5;
+}
+
+message GetUserKycDocsRequest {
+string userId = 1 	 ;
+}
+
+message GetUserKycDocsResponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+kycResponseObject data = 4 	 ;
+repeated ErrorObject errorData = 5 ;
+}
+
+message kycResponseObject {
+businessProfile businessProfile = 1 	 ;
+individualProfile individualProfile = 2 ;
+repeated string moderationComments = 3  ;
+}
+
+message ErrorObject {
+string field = 1 	 ;
+string message = 2	 ;
+}
+
+message GetKycsResponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+KycList data = 4 	 ;
+}
+
+message KycList {
+repeated UserKyc list = 1 ;
+string totalCount = 2 	 ;
+}
+
+message UserKyc {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3 	 ;
+string sumsubKycStatus = 4 	 ;
+string sumsubReason = 5 	 ;
+string sumsubPayload = 6 	 ;
+string adminKycStatus = 7 	 ;
+string s3KycStatus = 8 	 ;
+string accountType = 9 	 ;
+string createdAt = 10 	 ;
+string updatedAt = 11 	 ;
+string nationality = 12 	 ;
+string firstName = 13 	 ;
+string lastName = 14 	 ;
+string email = 15 	 ;
+string phoneNumber = 16 	 ;
+string questionairePayload = 17 ;
+string isVerifiedAt = 18 	 ;
+string businessName = 19 	 ;
+string brandName = 20 	 ;
+string incorporationDate = 21   ;
+string companyType = 22 	 ;
+string taxVatId = 23 	 ;
+string completedBy = 24 ;
+string completedByUserId = 25 ;
+string adminFullName = 26;
+}
+
+message businessProfile {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3 	 ;
+string sumsubKycStatus = 4 	 ;
+string sumsubReason = 5 	 ;
+string sumsubPayload = 6 	 ;
+string adminKycStatus = 7 	 ;
+string s3KycStatus = 8 	 ;
+string accountType = 9 	 ;
+string createdAt = 10 	 ;
+string updatedAt = 11 	 ;
+string nationality = 12 	 ;
+string email = 15 	 ;
+string phoneNumber = 16 	 ;
+string questionairePayload = 17 	 ;
+string isVerifiedAt = 18 	 ;
+string businessName = 19 	 ;
+string brandName = 20 	 ;
+string incorporationDate = 21 	 ;
+string companyType = 22 	 ;
+string taxVatId = 23 	 ;
+repeated UserKycDoc businessDocs = 25 ;
+repeated UBOsList ubos = 26 	 ;
+string registrationNumber = 27 	 ;
+string individualAccountInf = 28 	 ;
+}
+
+message individualProfile {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3 	 ;
+string sumsubKycStatus = 4 	 ;
+string sumsubReason = 5 	 ;
+string sumsubPayload = 6 	 ;
+string adminKycStatus = 7 	 ;
+string s3KycStatus = 8 	 ;
+string accountType = 9 	 ;
+string createdAt = 10 	 ;
+string updatedAt = 11 	 ;
+string nationality = 12 	 ;
+string firstName = 13 	 ;
+string lastName = 14 	 ;
+string email = 15 	 ;
+string phoneNumber = 16 	 ;
+string questionairePayload = 17 	 ;
+string isVerifiedAt = 18 	 ;
+repeated UserKycDoc individualDocs = 19 ;
+string dob = 20 	 ;
+string address = 21 	 ;
+string zipCode = 22 	 ;
+string verificationFullPayload = 23 	 ;
+string nationalId = 24 	 ;
+string city = 25 	 ;
+string individualAccountInf = 26 	 ;
+}
+
+message UBOsList {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3 	 ;
+string sumsubKycStatus = 4 	 ;
+string sumsubReason = 5 	 ;
+string sumsubPayload = 6 	 ;
+string adminKycStatus = 7 	 ;
+string s3KycStatus = 8 	 ;
+string accountType = 9 	 ;
+string createdAt = 10 	 ;
+string updatedAt = 11 	 ;
+string nationality = 12 	 ;
+string firstName = 13 	 ;
+string lastName = 14 	 ;
+string email = 15 	 ;
+string phoneNumber = 16 	 ;
+string questionairePayload = 17 	 ;
+string isVerifiedAt = 18 	 ;
+repeated UserKycDoc individualDocs = 19 ;
+string dob = 20 	 ;
+string address = 21 	 ;
+string zipCode = 22 	 ;
+string verificationFullPayload = 23 	 ;
+string nationalId = 24 	 ;
+string city = 25 	 ;
+string individualAccountInf = 26 	 ;
+repeated string moderationComment = 27  ;
+}
+
+message UserKycDoc {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3 ;
+string kycId = 4 	 ;
+string sumsubDocId = 5 ;
+string docName = 6 	 ;
+string docType = 7 	 ;
+string docPath = 8 	 ;
+string viewType = 9	 ;
+string s3Status = 10   ;
+string createdAt = 11  ;
+string updatedAt = 12  ;
+}
+
+message UpdateUserKycStatusResponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+string data = 4 	 ;
+repeated ErrorObject errorData = 5	 ;
+}
+
+message GetKytsRequest {
+string offset = 1 	 ;
+string limit = 2 	 ;
+filter filter = 3 	 ;
+}
+
+message filter {
+string txnStatus = 1   ;
+string searchBy= 2 	 ;
+string startDate = 3   ;
+string endDate = 4 	 ;   
+string type = 5;
+}
+
+message GetKytsResponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+KytList data = 4 	 ;
+repeated ErrorObject errorData = 5 ;
+}
+
+message KytList {
+repeated UserKyt list = 1 ;
+string totalCount = 2 	 ;
+}
+
+message UserKyt {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3 	 ;
+string score = 4 	 ;
+string txnStatus = 5 	 ;
+string createdAt = 6 	 ;
+string updatedAt = 7 	 ;
+string txnType = 9 	 ;
+string txnId = 10 	 ;
+string coinName = 11 	 ;
+string clientId = 12 	 ;
+string typeId = 13 	 ;
+string amount = 14 	 ;
+string withdrawId = 15 	 ;
+bool wasSuspicious = 16 	 ;
+string toAddress = 17 	 ;
+string fromAddress = 18 	 ;
+string sumsubResponse = 19 ;
+string trxPayload = 20           ;
+string type = 21 ; 
+string coinSymbol = 22;
+string coinNetwork = 23;
+string kytStatus = 24;
+}
+
+message GetKytsByUser {
+string offset = 1 	 ;
+string limit = 2 	 ;
+filter filter = 3 	 ;
+string userId = 4 	 ;
+}
+
+message UploadKycDocRequest {
+  string userId = 1;
+  bytes docFile = 2;
+  string fileType = 3;
+  string docName = 4;
+  string txnId = 5;
+}
+
+message UploadKycDocResponse {
+string status = 1 	 ;
+string message = 2 	 ;
+bool error = 3 	 ;
+ImageData data = 4 	 ;
+repeated ErrorObject errorData = 5 ;
+}
+
+message ImageData{
+    string imageId = 1 ; 
+    string isTransactionDoc = 2 ; 
+}
+
+
+message UpdateKycByComplianceRequest{
+string userId = 1 	 ;
+string sumsubKycStatus = 2 	 ;
+string completedBy = 3 	 ;
+string completedByUserId = 4 	 ;
+}
+
+message UpdateKycByComplianceResponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+string data = 4 	 ;
+repeated ErrorObject errorData = 5 	 ;
+}
+
+message GetUserVerificationAlertResponse{
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+repeated string data = 4 	 ;
+repeated ErrorObject errorData = 5 	 ;
+}
+
+message GetUserVerificationAlertRequest{
+string applicantId = 1 	 ;
+}
+
+message GetTxnDetailRequest {
+string txnId = 1 	 ;
+string typeId = 2 ; 
+}
+
+message GetTxnDetailReponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+string data = 4 	 ;
+repeated ErrorObject errorData = 5 ;
+}
+
+message getVerificationScreeningRequest {
+string userType = 1 	 ;
+string limit = 2 	 ;
+string offset = 3 	 ;
+}
+
+message getVerificationScreeningResponse {
+string status= 1 	 ;
+string message=2 	 ;
+bool error=3 	 ;
+verificationPayload data = 4 	 ;
+repeated ErrorObject errorData = 5 	 ;
+}
+
+message verificationPayload {
+clientVerified clientVerified = 1 	 ;
+rejectedRequest rejectedRequest = 2 	 ;
+doucmentsVerified doucmentsVerified = 3 	 ;
+alertRaised alertRaised = 4 	 ;
+verificationChartData verificationChartData = 5 ;
+allAlertsPayload allAlerts = 6 	 ;
+}
+
+message allAlertsPayload{
+repeated alertRecord rows = 1 ;
+string count = 2 	 ;
+}
+
+message alertRecord {
+string id = 1 	 ;
+string userId = 2 	 ;
+string applicantId = 3	 ;
+repeated string alert = 4 ;
+string createdAt = 5 	 ;
+string updatedAt = 6 	 ;
+}
+
+message clientVerified {
+string totalCount = 1 	 ;
+string lastSevenDayCount = 2  ;
+string lastThirtyDayCount = 3 ;
+}
+
+message doucmentsVerified {
+string totalCount = 1 	 ;
+string lastSevenDayCount = 2  ;
+string lastThirtyDayCount = 3 ;
+}
+
+message rejectedRequest {
+string totalCount = 1 	 ;
+string lastSevenDayCount = 2  ;
+string lastThirtyDayCount = 3 ;
+}
+
+message alertRaised {
+string totalCount = 1 	 ;
+string lastSevenDayCount = 2  ;
+string lastThirtyDayCount = 3 ;
+}
+
+message verificationChartData {
+string alertGenerated = 1 	 ;
+string approved = 2 	 ;
+string approvedManually = 3 	 ;
+}
+
+// ===== questionnaire =====
+
+message GetQuestinnaireRequest {
+string userId = 1 ;
+}
+
+message GetQuestinnaireResponse {
+repeated Questionnaire data = 1 ;
+}
+
+message Questionnaire {
+string id = 1 ;
+string questionId = 2 ;
+string answerId = 3 ;
+string userId = 4 ;
+string manualScore = 5 ;
+string createdAt = 6 ;
+string updatedAt = 7 ;
+repeated QuestionnaireComments comments = 8 ;
+Answer answer = 9 ;
+Question question = 10 ;
+}
+
+message QuestionnaireComments {
+string id = 1 ;
+string text = 2 ;
+string questionnaireId = 3 ;
+string adminId = 4 ;
+string createdAt = 5 ;
+string updatedAt = 6 ;
+string manualScore = 7 ;
+}
+
+message Answer {
+string id = 1 ;
+string key = 2 ;
+string title = 3 ;
+string score = 4 ;
+string type = 5 ; // business, individual
+string questionId = 6 ;
+}
+
+message Question {
+string id = 1 ;
+string title = 2 ;
+string key = 3 ;
+string type = 4 ; // business, individual
+}
+
+message UpdateManualScoreRequest {
+string questionnaireId = 1 ;
+string manualScore = 2 ;
+string text = 3 ;
+string adminId = 4 ;
+}
+
+message UpdateManualScoreResponse {
+Questionnaire data = 1 ;
+}
+
+message GetKytDocRequest {
+    string limit = 1 ;
+    string offset = 2 ;
+    string userId = 3 ;
+    string txnId = 4 ;
+    string docType = 5 ;
+}
+
+message GetKytDocResponse {
+    string status= 1 	 ;
+    string message=2 	 ;
+    bool error=3 	 ;
+    string data = 4 	 ;
+    repeated ErrorObject errorData = 5 ;
+}
+
+
+message updateAdditionalDocRequest {
+    string userId = 1;
+    string txnId = 2; 
+    string id = 3;
+    string newTitle = 4;
+}
+
+message updateAdditionalDocResponse {
+     string status= 1 	 ;
+    string message=2 	 ;
+    bool error=3 	 ;
+    string data = 4 	 ;
+    repeated ErrorObject errorData = 5 ;
+}
+
+message removeAdditionalDocumentRequest {
+    string userId = 1;
+    string txnId = 2;
+    string docId = 3;
+    string imagePath = 4; 
+}
+
+message removeAdditionalDocumentResponse {
+    string status= 1 	 ;
+    string message=2 	 ;
+    bool error=3 	 ;
+    ErrorObject data = 4 	 ;
+    repeated ErrorObject errorData = 5 ;
+}
+
+service UserService {
+  rpc getCountryList (GetCountryListRequest) returns (GetCountryListReponse);
+  rpc getUsers (GetUsersRequest) returns (GetUsersReponse);
+  rpc blockUnblockUser (BlockUnBlockUserRequest) returns (BlockUnBlockUserResponse);
+  rpc getTxnStatusByKey (GetTxnStatusByKeyRequest) returns (GetTxnStatusByKeyResponse);
+  rpc updateUserTxnStatus (UpdateUserTxnStatusRequest) returns (UpdateUserTxnStatusResponse);
+  rpc getUserDetails (GetUserDetailRequest) returns (GetUserDetailResponse);
+  rpc getUserDetailByClientId (GetUserDetailByClientIdRequest) returns (GetUserDetailByClientIdResponse);
+  rpc getUserByClientId (GetUserByClientIdRequest) returns (GetUserByClientIdResponse);
+  rpc updateUserClientId (updateUserClientIdRequest) returns (updateUserClientIdResponse);
+  rpc updateUserKycStatus (UpdateUserKycStatusRequest) returns (UpdateUserKycStatusResponse);
+  rpc updateAdminKycStatus (UpdateAdminKycStatusRequest) returns (UpdateAdminKycStatusResponse);
+  rpc getUserInfo (GetUserInfoRequest) returns (GetUserInfoResponse);
+  rpc getUserCounts (GetUserCountsRequest) returns (GetUserCountsResponse);
+  rpc verifyTransactionOtp (VerifyTransactionOtpRequest) returns (VerifyTransactionOtpResponse);
+  rpc getClientId (GetClientIdRequest) returns (GetClientIdResponse);
+  rpc GetUserFcmTokens (getUserFcmTokensRequest) returns (getUserFcmTokensResponse);
+  rpc GetUserDataByEmail (getUserDataByEmailRequest) returns (getUserDataByEmailResponse);
+  rpc IsUserSessionExist (IsUserSessionExistRequest) returns (IsUserSessionExistResponse);
+  rpc GetSupportTickets (getSupportTicketsRequest) returns (getSupportTicketsResponse);
+  rpc updateSupportTicketStatus (updateSupportTicketStatusRequest) returns (updateSupportTicketStatusResponse);
+  rpc getUserInfoByUid (GetUserInfoByUniqueIdRequest) returns (GetUserInfoByUniqueIdResponse);
+  rpc getAllOtps (GetAllOtpsRequest) returns (GetAllOtpsResponse);
+  rpc deleteUserAccount (DeleteUserAccountRequest) returns (DeleteUserAccountResponse);
+  rpc getKycs(GetKycsRequest) returns (GetKycsResponse) 	 ;
+  rpc getUserKycDocs(GetUserKycDocsRequest) returns (GetUserKycDocsResponse) 	 ;
+  rpc getAllKyts(GetKytsRequest) returns (GetKytsResponse) 	 ;
+  rpc getAllKytsByUser(GetKytsByUser) returns (GetKytsResponse) 	 ;
+  rpc uploadKycDoc(UploadKycDocRequest) returns (UploadKycDocResponse) 	 ;
+  rpc getComplianceKycs(GetComplianceKycsRequest) returns (GetKycsResponse) 	 ;
+  rpc updateKycByCompliance(UpdateKycByComplianceRequest) returns (UpdateKycByComplianceResponse) 	 ;
+  rpc getSumsubAlertForUser(GetUserVerificationAlertRequest) returns (GetUserVerificationAlertResponse)	 ;
+  rpc getTxnDetailByTxnId(GetTxnDetailRequest) returns (GetTxnDetailReponse) 	 ;
+  rpc getVerificationScreening(getVerificationScreeningRequest) returns (getVerificationScreeningResponse) ;
+  rpc getQuestionnaire(GetQuestinnaireRequest) returns (GetQuestinnaireResponse) ;
+  rpc updateManualScore(UpdateManualScoreRequest) returns (UpdateManualScoreResponse) ;
+  rpc getKytDocList(GetKytDocRequest) returns (GetKytDocResponse) ; 
+  rpc updateAdditionalDoc (updateAdditionalDocRequest) returns (updateAdditionalDocResponse) ;
+  rpc removeAdditionalDocument (removeAdditionalDocumentRequest) returns (removeAdditionalDocumentResponse);
+  
+}
